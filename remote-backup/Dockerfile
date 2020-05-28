@@ -9,9 +9,12 @@ RUN apk add --no-cache jq openssh-client zip
 
 # Hass.io CLI
 ARG BUILD_ARCH
-ARG CLI_VERSION
+# ARG CLI_VERSION
+RUN echo "apk add --no-cache curl \
+    && curl -Lso /usr/bin/hassio https://github.com/home-assistant/cli/releases/download/4.3.0/ha_${BUILD_ARCH} \
+    && chmod a+x /usr/bin/hassio" > /root/debug.log
 RUN apk add --no-cache curl \
-    && curl -Lso /usr/bin/hassio https://github.com/home-assistant/hassio-cli/releases/download/1.2.1/hassio_${BUILD_ARCH} \
+    && curl -Lso /usr/bin/hassio https://github.com/home-assistant/cli/releases/download/4.3.0/ha_${BUILD_ARCH} \
     && chmod a+x /usr/bin/hassio
 
 # Copy data
