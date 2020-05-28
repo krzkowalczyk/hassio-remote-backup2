@@ -100,12 +100,12 @@ function create-local-backup {
 
 create-local-backup
 
-if [[ -z $SSH_KEY ] &&  -z $SSH_HOST ] &&  -z $SSH_USER ]]; then
+if [[ -z $SSH_KEY ] &&  [ -z $SSH_HOST ] && [ -z $SSH_USER ]]; then
     echo "Copying backup to remote SSH server"
     add-ssh-key
     copy-backup-to-remote-ssh
 
-elif [[ -z $SMB_HOST ] &&  -z $SMB_PASSWORD ] &&  -z $SMB_USER ]]; then
+elif [[ -z $SMB_HOST ] && [ -z $SMB_PASSWORD ] && [ -z $SMB_USER ]]; then
     echo "Copying backup to remote SMB server"
     copy-backup-to-remote-smb
 else
