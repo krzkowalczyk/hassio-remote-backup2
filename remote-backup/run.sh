@@ -12,6 +12,10 @@ REMOTE_DIRECTORY=$(jq --raw-output ".remote_directory" $CONFIG_PATH)
 ZIP_PASSWORD=$(jq --raw-output '.zip_password' $CONFIG_PATH)
 KEEP_LOCAL_BACKUP=$(jq --raw-output '.keep_local_backup' $CONFIG_PATH)
 
+SMB_HOST=$(jq --raw-output ".smb.host" $CONFIG_PATH)
+SMB_USER=$(jq --raw-output ".smb.user" $CONFIG_PATH)
+SMB_PASSWORD=$(jq --raw-output ".smb.password" $CONFIG_PATH)
+
 # create variables
 SSH_ID="${HOME}/.ssh/id"
 
@@ -35,7 +39,7 @@ function add-ssh-key {
     chmod 600 "${HOME}/.ssh/id"
 }
 
-function copy-backup-to-remote {
+function copy-backup-to-remote-ssh {
 
     cd /backup/
     if [[ -z $ZIP_PASSWORD  ]]; then
@@ -45,6 +49,20 @@ function copy-backup-to-remote {
       echo "Copying password-protected ${slug}.zip to ${REMOTE_DIRECTORY} on ${SSH_HOST} using SCP"
       zip -P "$ZIP_PASSWORD" "${slug}.zip" "${slug}".tar
       scp -F "${HOME}/.ssh/config" "${slug}.zip" remote:"${REMOTE_DIRECTORY}" && rm "${slug}.zip"
+    fi
+
+}
+
+function copy-backup-to-remote-smb {
+
+    cd /backup/
+    if [[ -z $ZIP_PASSWORD  ]]; then
+      echo "Copying ${slug}.tar to ${REMOTE_DIRECTORY} on ${SMB_HOST} using curl"
+      curl --upload-file "${slug}.tar" -u "${SMB_USER}:${SMB_PASSWORD}" "smb://${SMB_HOST}/${REMOTE_DIRECTORY}"
+    else
+      echo "Copying password-protected ${slug}.zip to ${REMOTE_DIRECTORY} on ${SMB_HOST} using curl"
+      zip -P "$ZIP_PASSWORD" "${slug}.zip" "${slug}".tar
+      curl --upload-file "${slug}.zip" -u "${SMB_USER}:${SMB_PASSWORD}" "smb://${SMB_HOST}/${REMOTE_DIRECTORY}" && rm "${slug}.zip"
     fi
 
 }
@@ -80,10 +98,21 @@ function create-local-backup {
     echo "Backup created: ${slug}"
 }
 
-
-add-ssh-key
 create-local-backup
-copy-backup-to-remote
+
+if [[ -z $SSH_KEY ] &&  -z $SSH_HOST ] &&  -z $SSH_USER ]]; then
+    echo "Copying backup to remote SSH server"
+    add-ssh-key
+    copy-backup-to-remote-ssh
+
+elif [[ -z $SMB_HOST ] &&  -z $SMB_PASSWORD ] &&  -z $SMB_USER ]]; then
+    echo "Copying backup to remote SMB server"
+    copy-backup-to-remote-smb
+else
+    echo "No remote endpoint specified !"
+    echo "Unable to send backup to remote location !"
+fi
+
 delete-local-backup
 
 echo "Backup process done!"
