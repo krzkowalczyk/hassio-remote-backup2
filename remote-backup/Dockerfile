@@ -18,8 +18,8 @@ RUN apk add --no-cache curl \
     && chmod a+x /usr/bin/hassio
 
 # Copy data
-COPY run.sh /
-RUN chmod a+x /run.sh
+COPY run.sh backup.sh /
+RUN chmod a+x /run.sh /backup.sh
 
 CMD [ "/run.sh" ]
 
@@ -31,16 +31,16 @@ ARG BUILD_VERSION
 # Labels
 LABEL \
     io.hass.name="Remote Backup" \
-    io.hass.description="Automatically create Hass.io snapshots to remote server location using `SCP`." \
+    io.hass.description="Automatically create Hass.io snapshots to remote server location using `SCP` or SAMBA." \
     io.hass.arch="${BUILD_ARCH}" \
     io.hass.type="addon" \
     io.hass.version=${BUILD_VERSION} \
-    maintainer="Nicolai Bjerre Pedersen <mr.bjerre@gmail.com>" \
-    org.label-schema.description="Automatically create Hass.io snapshots to remote server location using `SCP`." \
+    maintainer="Krzysztof Kowalczyk <krz.kowalczyk@gmail.com>" \
+    org.label-schema.description="Automatically create Hass.io snapshots to remote server location using `SCP` or SAMBA." \
     org.label-schema.build-date=${BUILD_DATE} \
     org.label-schema.name="Remote Backup" \
     org.label-schema.schema-version="1.0" \
-    org.label-schema.usage="https://github.com/overkill32/hassio-remote-backup/tree/master/README.md" \
+    org.label-schema.usage="https://github.com/krzkowalczyk/hassio-remote-backup/tree/master/README.md" \
     org.label-schema.vcs-ref=${BUILD_REF} \
-    org.label-schema.vcs-url="https://github.com/overkill32/hassio-remote-backup/" \
-    org.label-schema.vendor="Hass.io add-ons by Nicolai"
+    org.label-schema.vcs-url="https://github.com/krzkowalczyk/hassio-remote-backup" \
+    org.label-schema.vendor="Hass.io add-ons by krzkowalczyk"

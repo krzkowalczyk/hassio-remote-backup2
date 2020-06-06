@@ -42,6 +42,6 @@
     "remote_directory": "str",
     "zip_password": "str",
     "keep_local_backup": "match(^(all|[+]?\\d*)$)",
-    "schedule": "string"
+    "schedule": "str"
   }
 }
