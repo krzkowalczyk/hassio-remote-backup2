@@ -1,0 +1,5 @@
+{
+    "name": "Hass.io remote backup to SCP and SMB",
+    "url": "https://github.com/krzkowalczyk/hassio-remote-backup2",
+    "maintainer": "Krzysztof Kowalczyk <krz.kowalczyk@gmail.com>"
+}
