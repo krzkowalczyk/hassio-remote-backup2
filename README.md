@@ -32,9 +32,9 @@ _Note_ the filenames of the backup are given by their assigned slug.
 
 ## <a name='installation'></a>Installation
 
-1. Copy `remote-backup2` folder into `addons/` directory.
-2. In Home-assistant supervisor panelgo to add-on-store and click refresh button.
-3. Select addon from `Local Add-Ons section` and click install.
+1. In Home-assistant supervisor panel go to `Add-on-store` and from options menu click `Repositories`.
+2. Paste the repository link into `Add reposotory` field and select add.
+3. Select addon from `Add-on store` and click install.
 
 ## <a name='configuration'></a>Configuration
 
