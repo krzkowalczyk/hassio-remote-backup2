@@ -50,7 +50,7 @@ _Note_ the filenames of the backup are given by their assigned slug.
 |&nbsp;&nbsp;`user`|No|Username to use for `SMB`.|
 |&nbsp;&nbsp;`password`|No|The password to use when connection to `SMB` share.|
 |`remote_directory`|Yes|The directory to put the backups on the remote server.|
-|`zip_password`|No|If set then the backup will be contained in a password protected zip|
+|`snapshot_password`|No|If set then the backup will be contained in a password protected zip|
 |`keep_local_backup`|No|Control how many local backups you want to preserve. Default (`""`) is to keep no local backups created from this addon. If `all` then all loocal backups will be preserved. A positive integer will determine how many of the latest backups will be preserved. Note this will delete other local backups created outside this addon.
 |`schedule`|yes|Backup schedule execution in cron format. Ex: `1 1 * * *` (Everyday at 1:01am)|
 
