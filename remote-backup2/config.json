@@ -1,6 +1,6 @@
 {
   "name": "Remote Backup v2",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "slug": "remote_backup2",
   "description": "Automatically create Hass.io snapshots to remote server using `SCP` or `SMB` protocol",
   "url": "https://github.com/krzkowalczyk/hassio-remote-backup2",

@@ -25,6 +25,9 @@ ARG BUILD_DATE
 ARG BUILD_REF
 ARG BUILD_VERSION
 
+# Set env version
+ENV BUILD_VERSION ${BUILD_VERSION}
+
 # Labels
 LABEL \
     io.hass.name="Remote Backup v2" \
