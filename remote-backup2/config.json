@@ -23,7 +23,7 @@
       "key": []
     },
     "remote_directory": "",
-    "zip_password": "",
+    "snapshot_password": "",
     "keep_local_backup": "",
     "schedule": "1 1 * * *"
   },
@@ -40,7 +40,7 @@
       "key": ["str"]
     },
     "remote_directory": "str",
-    "zip_password": "str",
+    "snapshot_password": "str",
     "keep_local_backup": "match(^(all|[+]?\\d*)$)",
     "schedule": "str"
   }

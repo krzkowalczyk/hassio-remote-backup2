@@ -68,7 +68,7 @@ ssh:
   user: ''
   key: []
 remote_directory: hassio/backup/
-zip_password: ''
+snapshot_password: ''
 keep_local_backup: ''
 schedule: 4 0 * * *
 ```
